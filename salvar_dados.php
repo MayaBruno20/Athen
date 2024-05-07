@@ -3,7 +3,7 @@
 $servername = "localhost"; // Endereço do servidor MySQL
 $username = "root"; // Nome de usuário do MySQL
 $password = ""; // Senha do MySQL
-$dbname = "test"; // Nome do banco de dados
+$dbname = "prseg"; // Nome do banco de dados
 
 // Parâmetros recebidos do AJAX
 $data = json_decode(file_get_contents("php://input"));
@@ -31,29 +31,14 @@ if ($data->id === "custo") {
 
 // Executar a declaração SQL
 if ($stmt->execute() === TRUE) {
-    echo "Dados inseridos/atualizados com sucesso";
+    // Dados inseridos/atualizados com sucesso
 } else {
     echo "Erro ao inserir/atualizar dados: " . $conn->error;
 }
 
-
-
-
-// Preparar a consulta SQL para buscar o valor do banco de dados
-$sql = "SELECT value FROM custos ORDER BY id DESC LIMIT 1"; // Supondo que o valor esteja na tabela 'custos' e tem o ID 1
-
-// Executar a consulta SQL
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // Retornar o valor como resposta
-    $row = $result->fetch_assoc();
-    echo $row["value"];
-} else {
-    echo "0"; // Se não houver resultados, retornar 0 como valor padrão
-}
-
 // Fechar a conexão com o banco de dados
-$stmt->close();
 $conn->close();
+
+// Retornar os valores para a página
+echo json_encode(array("custo" => $custo_value, "porcentagem" => $porcentagem_value));
 ?>

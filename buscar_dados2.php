@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 } 
 
 // Preparar a consulta SQL para buscar o valor do banco de dados
-$sql = "SELECT value FROM custos ORDER BY id DESC LIMIT 1"; // Supondo que o valor esteja na tabela 'custos' e tem o ID 1
+$sql = "SELECT value FROM porcentagens ORDER BY id DESC LIMIT 1"; // Supondo que o valor esteja na tabela 'custos' e tem o ID 1
 
 // Executar a consulta SQL
 $result = $conn->query($sql);

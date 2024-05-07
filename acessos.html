@@ -61,7 +61,7 @@
                     <div class="status">
                         <div class="info">
                             <h3>Segfy</h3>
-                            <button onclick="showAccess('segfy')">Login</button>
+                            <button onclick="showAccess('segfy')" data-platform="segfy">Login</button>
                         </div>
                         <div class="progresss">
                             <small>
@@ -74,7 +74,7 @@
                     <div class="status">
                         <div class="info">
                             <h3>Bradesco</h3>
-                            <button onclick="showAccess('brad')">Login</button>
+                            <button onclick="showAccess('brad')" data-platform="brad">Login</button>
                         </div>
                         <div class="progresss">
                             <small>
@@ -87,7 +87,7 @@
                     <div class="status">
                         <div class="info">
                             <h3>Porto</h3>
-                            <button onclick="showAccess('porto')">Login</button>
+                            <button onclick="showAccess('porto')" data-platform="porto">Login</button>
                         </div>
                         <div class="progresss">
                             <small>
@@ -104,6 +104,8 @@
 
                 </div>
             </div>
+
+
             <!-- End of Analyses -->
             <div id="modal" class="modal">
                 <div class="modal-content">
@@ -118,7 +120,7 @@
                     <div contenteditable="true" id="senha" class="editable-field"></div>
                   </div>
                   <p><b>Link:</b> <a id="link" href="" target="_blank"></a></p>
-                  <button onclick="saveChanges()">Salvar</button>
+                  <button  onclick="saveChanges()">Salvar</button>
                 </div>
             </div>
         </main>

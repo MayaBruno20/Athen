@@ -1,4 +1,3 @@
-// Função para exibir a modal com os detalhes da plataforma
 function showAccess(platform) {
     var modal = document.getElementById("modal");
     var platformTitle = document.getElementById("platformTitle");
@@ -9,21 +8,21 @@ function showAccess(platform) {
     // Definir os detalhes da plataforma
     switch(platform) {
         case "segfy":
-            platformTitle.textContent = "Acesso";
+            platformTitle.textContent = "Acesso Segfy";
             emailElement.textContent = "email@segfy.com";
             senhaElement.textContent = "senha123";
-            linkElement.textContent = "https://www.segfy.com";
+            linkElement.textContent = "Segfy";
             linkElement.setAttribute("href", "https://www.segfy.com");
             break;
         case "brad":
-            platformTitle.textContent = "Acesso";
-            emailElement.textContent = "email@bradesco.com";
-            senhaElement.textContent = "senha456";
-            linkElement.textContent = "https://www.bradesco.com.br";
+            platformTitle.textContent = "Acesso Bradesco";
+            emailElement.textContent = "";
+            senhaElement.textContent = "";
+            linkElement.textContent = "Bradesco";
             linkElement.setAttribute("href", "https://www.bradesco.com.br");
             break;
         case "porto":
-            platformTitle.textContent = "Acesso";
+            platformTitle.textContent = "Acesso Porto Seguro";
             emailElement.textContent = "445.624.838-65";
             senhaElement.textContent = "PRseg1394$";
             linkElement.textContent = "Porto";
@@ -46,4 +45,26 @@ function showAccess(platform) {
             modal.style.display = "none";
         }
     }
+
+    // Salvar os dados ao clicar no botão de salvar
+    var saveBtn = document.querySelector("#modal button");
+    saveBtn.addEventListener("click", function() {
+        var email = document.getElementById("email").textContent;
+        var senha = document.getElementById("senha").textContent;
+
+        // Enviar os dados para o servidor via AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "acessos.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                // Verificar se os dados foram salvos com sucesso
+                console.log(xhr.responseText);
+                // Fechar a modal após salvar os dados
+                modal.style.display = "none";
+            }
+        };
+        var params = "platform=" + encodeURIComponent(platform) + "&email=" + encodeURIComponent(email) + "&senha=" + encodeURIComponent(senha);
+        xhr.send(params);
+    });
 }

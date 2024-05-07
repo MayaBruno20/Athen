@@ -92,7 +92,6 @@ function saveChangesPorcentagem(element, newValue) {
     xhr.send(JSON.stringify(data));
 }
 
-
 // Função para buscar e exibir o valor do banco de dados
 function exibirValorCusto() {
     // Fazer uma solicitação AJAX para buscar o valor no banco de dados
