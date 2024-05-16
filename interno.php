@@ -137,7 +137,7 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
                                     <circle cx="38" cy="38" r="36"></circle>
                                 </svg>
                                 <div class="addBtn">
-                                    <h1>0%</h1>
+                                    <h1>4%</h1>
                                 </div>
                             </div>
                         </div>

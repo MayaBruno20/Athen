@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="imagex/png" href="Imagens/1_PR-SEG_preferencial.png">
+    <link rel="shortcut icon" type="imagex/png" href="Imagens/logos/favicon.png">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="Styles/acessos.css">
+    <link rel="stylesheet" href="styles/acessos.css">
 
 
     <title>Cofre de Senhas</title>
@@ -32,7 +32,7 @@
             <div class="sidebar">
                 <a href="dashboard.php" class="active">
                     <span class="material-icons-sharp">
-                        lock
+                        dashboard
                     </span>
                     <h3>Acessos</h3>
                 </a>
@@ -61,7 +61,7 @@
                     <div class="status">
                         <div class="info">
                             <h3>Segfy</h3>
-                            <button onclick="showAccess('segfy')" data-platform="segfy">Login</button>
+                            <button onclick="showAccess('segfy')">Login</button>
                         </div>
                         <div class="progresss">
                             <small>
@@ -74,7 +74,7 @@
                     <div class="status">
                         <div class="info">
                             <h3>Bradesco</h3>
-                            <button onclick="showAccess('brad')" data-platform="brad">Login</button>
+                            <button onclick="showAccess('brad')">Login</button>
                         </div>
                         <div class="progresss">
                             <small>
@@ -87,7 +87,7 @@
                     <div class="status">
                         <div class="info">
                             <h3>Porto</h3>
-                            <button onclick="showAccess('porto')" data-platform="porto">Login</button>
+                            <button onclick="showAccess('porto')">Login</button>
                         </div>
                         <div class="progresss">
                             <small>
@@ -96,16 +96,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="sales">
-                    <div class="add">
-                        <h1>Gerenciar Acesso</h1>
-                        <button>Add</button>
-                    </div>
 
+                <div class="visits">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Axa</h3>
+                            <button onclick="showAccess('axa')">Login</button>
+                        </div>
+                        <div class="progresss">
+                            <small>
+                                <img src="Imagens/logos/axa.png" alt="">
+                            </small>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
             <!-- End of Analyses -->
             <div id="modal" class="modal">
                 <div class="modal-content">
@@ -120,7 +125,7 @@
                     <div contenteditable="true" id="senha" class="editable-field"></div>
                   </div>
                   <p><b>Link:</b> <a id="link" href="" target="_blank"></a></p>
-                  <button  onclick="saveChanges()">Salvar</button>
+                  <button>Salvar</button>
                 </div>
             </div>
         </main>
@@ -165,15 +170,26 @@
             
             <div class="reminders">
                 <div class="header">
-                    <h2>Avisos</h2>
+                    <h2>Lembretes</h2>
                     <span class="material-icons-sharp">
                         notifications_none
                     </span>
                 </div>
 
                 <div class="notification">
-                    <h2>Métodos de Segurança</h2>
-                    <p>Não Compartilhe informações confidenciais.</p>
+                    
+                </div>
+
+                <div class="notification deactive">
+
+                </div>
+
+                <div id="addReminderModal" class="additional-box">
+
+                </div>
+
+                <div class="notification add-reminder" id="addReminderButton" onclick="showReminderModal()">
+   
                 </div>
             </div>
     </div>

@@ -3,7 +3,7 @@
 $servername = "localhost"; // Endereço do servidor MySQL
 $username = "root"; // Nome de usuário do MySQL
 $password = ""; // Senha do MySQL
-$dbname = "prseg"; // Nome do banco de dados
+$dbname = "pr"; // Nome do banco de dados
 
 // Conectar ao banco de dados
 $conn = new mysqli($servername, $username, $password, $dbname);

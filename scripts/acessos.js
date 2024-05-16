@@ -1,3 +1,5 @@
+
+// Função para exibir a modal com os detalhes da plataforma
 function showAccess(platform) {
     var modal = document.getElementById("modal");
     var platformTitle = document.getElementById("platformTitle");
@@ -8,26 +10,33 @@ function showAccess(platform) {
     // Definir os detalhes da plataforma
     switch(platform) {
         case "segfy":
-            platformTitle.textContent = "Acesso Segfy";
-            emailElement.textContent = "email@segfy.com";
+            platformTitle.textContent = "Acesso";
+            emailElement.textContent = "contato@prseg.com.br";
             senhaElement.textContent = "senha123";
             linkElement.textContent = "Segfy";
             linkElement.setAttribute("href", "https://www.segfy.com");
             break;
         case "brad":
-            platformTitle.textContent = "Acesso Bradesco";
-            emailElement.textContent = "";
-            senhaElement.textContent = "";
+            platformTitle.textContent = "Acesso";
+            emailElement.textContent = "445.624.838-65";
+            senhaElement.textContent = "Sadan2023$";
             linkElement.textContent = "Bradesco";
-            linkElement.setAttribute("href", "https://www.bradesco.com.br");
+            linkElement.setAttribute("href", "https://login.bradescoseguros.com.br/nidp/app/login?id=secure_name_pasword_form_pneg&option=credential&target=https%3A%2F%2Fwwwn.bradescoseguros.com.br%2Fpnegocios%2Fwps%2Fmyportal%2Fportalnegocios%2Farealogada%2F");
             break;
         case "porto":
-            platformTitle.textContent = "Acesso Porto Seguro";
+            platformTitle.textContent = "Acesso";
             emailElement.textContent = "445.624.838-65";
             senhaElement.textContent = "PRseg1394$";
             linkElement.textContent = "Porto";
             linkElement.setAttribute("href", "https://corretor.portoseguro.com.br/corretoronline/");
             break;
+            case "axa":
+                platformTitle.textContent = "Acesso";
+                emailElement.textContent = "igorpinheirorocha@prseg.com.br";
+                senhaElement.textContent = "Maiasadan2024#";
+                linkElement.textContent = "Axa";
+                linkElement.setAttribute("href", "https://corretor.axa.com.br/portal-corretor/");
+                break;
         // Adicione mais casos conforme necessário para outras plataformas
     }
 
@@ -45,26 +54,14 @@ function showAccess(platform) {
             modal.style.display = "none";
         }
     }
+}
 
-    // Salvar os dados ao clicar no botão de salvar
-    var saveBtn = document.querySelector("#modal button");
-    saveBtn.addEventListener("click", function() {
-        var email = document.getElementById("email").textContent;
-        var senha = document.getElementById("senha").textContent;
+function clearCache() {
+    localStorage.clear();
+    sessionStorage.clear();
+    location.reload();
+}
 
-        // Enviar os dados para o servidor via AJAX
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "acessos.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                // Verificar se os dados foram salvos com sucesso
-                console.log(xhr.responseText);
-                // Fechar a modal após salvar os dados
-                modal.style.display = "none";
-            }
-        };
-        var params = "platform=" + encodeURIComponent(platform) + "&email=" + encodeURIComponent(email) + "&senha=" + encodeURIComponent(senha);
-        xhr.send(params);
-    });
+function updateDataBackend() {
+    clearCache();
 }

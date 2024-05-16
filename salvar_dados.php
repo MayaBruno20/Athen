@@ -3,7 +3,7 @@
 $servername = "localhost"; // Endereço do servidor MySQL
 $username = "root"; // Nome de usuário do MySQL
 $password = ""; // Senha do MySQL
-$dbname = "prseg"; // Nome do banco de dados
+$dbname = "pr"; // Nome do banco de dados
 
 // Parâmetros recebidos do AJAX
 $data = json_decode(file_get_contents("php://input"));
@@ -25,7 +25,7 @@ if ($data->id === "custo") {
     $stmt->bind_param("ss", $data->id, $data->value);
 } elseif ($data->id === "porcentagem") {
     // Lidar com os dados do elemento <h1> (porcentagem)
-    $stmt = $conn->prepare("INSERT INTO porcentagens (value) VALUES (?) ON DUPLICATE KEY UPDATE value = VALUES(value)");
+    $stmt = $conn->prepare("UPDATE porcentagens SET value = ? WHERE id = 1");
     $stmt->bind_param("s", $data->value);
 }
 

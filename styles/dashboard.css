@@ -1196,9 +1196,9 @@ html{
         }
 
         .right-section .nav .dark-mode{
-            width: 4.4rem;
+            width: 4rem;
             position: absolute;
-            left: 66%;
+            left: 50%;
         }
 
         .right-section .profile .info{

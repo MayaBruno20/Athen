@@ -1,6 +1,12 @@
 // Lista de pedidos com detalhes específicos
 const Orders = [
     {
+        productName: 'FGTS',
+        productNumber: '01',
+        paymentStatus: 'Comissão',
+        status: 'Sacar'
+    },
+    {
         productName: 'Consórcio',
         productNumber: '85743',
         paymentStatus: 'Pix',
