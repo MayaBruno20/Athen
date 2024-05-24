@@ -17,7 +17,7 @@ $reset_time = 60 * 5; // Tempo em segundos para redefinir o contador de tentativ
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "users";
+$dbname = "pr";
 
 // Conexão com o banco de dados
 $conn = new mysqli($servername, $username, $password, $dbname);

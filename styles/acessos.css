@@ -395,7 +395,7 @@ html{
       
       .modal-content .editable-field{
         border: 1px solid var(--color-dark);
-        width: 70%;
+        width: auto;
         height: 10%;
       }
 
