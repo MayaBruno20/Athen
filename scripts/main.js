@@ -2,13 +2,10 @@ console.log('Script carregado'); // Log para garantir que o script está sendo c
 
 // Função para registrar o ponto
 function registerAttendance() {
-    const employeeName = document.getElementById('employeeName').value;
+    const employeeName = loggedInEmployeeName;
     const delayReason = document.getElementById('delayReason').value;
     const action = 'registerAttendance'; // Indica a ação que será executada no backend
     
-    // Armazena o employeeName selecionado no armazenamento local
-    localStorage.setItem('selectedEmployeeName', employeeName);
-  
     // Monta os dados a serem enviados para o backend
     const data = new URLSearchParams();
     data.append('employeeName', employeeName);
@@ -74,7 +71,7 @@ function displayAttendanceLog() {
 
 // Função para registrar o ponto de almoço
 function registerLunchBreak() {
-    const employeeName = document.getElementById('employeeName').value;
+    const employeeName = loggedInEmployeeName;
     const action = 'registerLunchBreak'; // Indica a ação que será executada no backend
 
     // Monta os dados a serem enviados para o backend
@@ -104,7 +101,7 @@ function registerLunchBreak() {
 
 // Função para solicitar saída antecipada
 function requestEarlyOut() {
-    const employeeName = document.getElementById('employeeName').value;
+    const employeeName = loggedInEmployeeName;
     const earlyOutReason = document.getElementById('earlyOutReason').value;
     const action = 'requestEarlyOut'; // Indica a ação que será executada no backend
 
@@ -295,10 +292,4 @@ window.onload = function() {
     exibirValorCusto();
     exibirValorPorcentagem();
     displayAttendanceLog();
-
-    // Restaurar employeeName selecionado
-    const storedEmployeeName = localStorage.getItem('selectedEmployeeName');
-    if (storedEmployeeName) {
-        document.getElementById('employeeName').value = storedEmployeeName;
-    }
 };

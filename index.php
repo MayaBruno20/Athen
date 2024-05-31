@@ -40,14 +40,14 @@ function criarHashSenha($senha) {
 // Função para verificar se o usuário existe e a senha está correta
 function verificarLogin($conn, $username, $password) {
     // Consulta preparada para buscar usuário no banco de dados
-    $stmt = $conn->prepare("SELECT username, password FROM usuarios WHERE username = ?");
+    $stmt = $conn->prepare("SELECT id, username, password FROM usuarios WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
     
     if($row && password_verify($password, $row['password'])) {
-        return true; // Usuário e senha corretos
+        return $row; // Retorna a linha completa do usuário
     } else {
         return false; // Usuário ou senha incorretos
     }
@@ -60,9 +60,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
     // Verifica se o usuário e a senha estão corretos
-    if(verificarLogin($conn, $username, $password)) {
-        // Define a sessão como logada
+    $user = verificarLogin($conn, $username, $password);
+    if($user) {
+        // Define a sessão como logada e armazena o id e o nome do usuário
         $_SESSION['logged_in'] = true;
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_name'] = $user['username'];
         header("Location: interno.php"); // Redireciona para a página principal após o login
         exit;
     } else {
@@ -70,7 +73,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 
         // Incrementa o contador de tentativas de login (pode ser usado para limitar o número de tentativas)
         $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
-        
     }
 }
 

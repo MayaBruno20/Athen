@@ -5,6 +5,8 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
     header("Location: index.php");
     exit;
 }
+
+$user_name = $_SESSION['user_name']
 ?>
 
 
@@ -168,23 +170,13 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
                         <h1>Ponto Digital</h1>
                         <div id="registerForm">
                             <label for="employeeName">Nome do Funcionário:</label>
-                            <select id="employeeName" required>
-                                <option value="Bruno Maia">Bruno Maia</option>
-                                <option value="Gabrielle Dupim">Gabrielle Dupim</option>
-                                <option value="Igor Pinheiro">Igor Pinheiro</option>
-                                <option value="Jhonatan Checoni">Jhonathan Checoni</option>
-                                <option value="Lavinia Dupim">Lavinia Dupim</option>
-                                <option value="Lucas Aielo">Lucas Aielo</option>
-                                <option value="Matheus Rocha">Matheus Rocha</option>
-                                <option value="Nalva Pinheiro">Nalva Pinheiro</option>
-                                <option value="Vitoria Saraiva">Vitória Saraiva</option>
-                            </select>
+                            <input type="text" id="employeeName" value="<?php echo $user_name; ?>" disabled>
                                 
                             <label for="delayReason">Motivo do Atraso:</label>
                             <input type="text" id="delayReason" placeholder="Informe o motivo do atraso (opcional)">
                                 
-                            <button onclick="registerAttendance()">Registrar Ponto</button>
-                            <button onclick="registerLunchBreak()">Registrar Ponto de Almoço</button>
+                            <button onclick="registerAttendance()" aria-label="Registrar Ponto">Registrar Ponto</button>
+                            <button onclick="registerLunchBreak()" aria-label="Registrar Ponto de Almoço">Registrar Ponto de Almoço</button>
                         </div>
                     </div>    
 
@@ -192,7 +184,7 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
                         <h2>Solicitar Saída Antecipada</h2>
                         <label for="earlyOutReason">Motivo:</label>
                         <input type="text" id="earlyOutReason" placeholder="Informe o motivo da saída antecipada">
-                        <button onclick="requestEarlyOut()">Solicitar Saída</button>
+                        <button onclick="requestEarlyOut()" aria-label="Solicitar Saída">Solicitar Saída</button>
                     </div>
                 </div>
 
@@ -202,6 +194,7 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
                         <ul id="logList"></ul>  
                     </div>
                 </div>
+                
             </div>
    
             <div id="manageProfile-box" class="additional-box" style="display: none;">
@@ -350,17 +343,22 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
             </div>
         </div>
     </div>
+
+    <script>
+        // Define o nome do funcionário logado
+        const loggedInEmployeeName = "<?php echo $user_name; ?>";
+    </script>
+    
     <script>
         function toggleSettings() {
             var settingsContent = document.querySelector('.settings-content');
                 settingsContent.style.display = (settingsContent.style.display === 'none' || settingsContent.style.display === '') ? 'block' : 'none';
-        }
+        }        
     </script>
     
     <script src="scripts/index.js"></script>
     <script src="scripts/main.js"></script>
     
-    
-
 </body>
+
 </html>
