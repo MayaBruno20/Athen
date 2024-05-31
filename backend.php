@@ -34,9 +34,9 @@ function requestEarlyOut($conn, $employeeName, $earlyOutReason, $userId) {
     return $stmt->execute();
 }
 
-function getAttendanceRecords($conn, $userId) {
-    $stmt = $conn->prepare("SELECT employee_name, timestamp, delay_reason FROM registerForm WHERE user_id = ?");
-    $stmt->bind_param("i", $userId);
+function getAttendanceRecords($conn, $userId, $limit = 20) {
+    $stmt = $conn->prepare("SELECT employee_name, timestamp, delay_reason FROM registerForm WHERE user_id = ? ORDER BY timestamp DESC LIMIT ?");
+    $stmt->bind_param("ii", $userId, $limit);
     $stmt->execute();
     $result = $stmt->get_result();
     $attendanceRecords = array();
@@ -104,6 +104,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if ($_GET["action"] == "getAttendanceRecords") {
         $userId = $_SESSION['user_id'];
         getAttendanceRecords($conn, $userId);
+    } elseif ($_GET["action"] == "getFullAttendanceRecords") {
+        $userId = $_SESSION['user_id'];
+        getAttendanceRecords($conn, $userId, PHP_INT_MAX); // Retorna todos os registros
     } elseif ($_GET["action"] == "getEmployeeList") {
         getEmployeeList($conn);
     }

@@ -185,6 +185,7 @@ $user_name = $_SESSION['user_name']
                         <label for="earlyOutReason">Motivo:</label>
                         <input type="text" id="earlyOutReason" placeholder="Informe o motivo da saída antecipada">
                         <button onclick="requestEarlyOut()" aria-label="Solicitar Saída">Solicitar Saída</button>
+                        <button id="historyBtn">Ver Histórico Completo</button>
                     </div>
                 </div>
 
@@ -192,6 +193,7 @@ $user_name = $_SESSION['user_name']
                     <div class="links-list">
                         <h2>Registros</h2>
                         <ul id="logList"></ul>  
+
                     </div>
                 </div>
                 
@@ -220,6 +222,14 @@ $user_name = $_SESSION['user_name']
             </div>
         </main>
         <!-- End of Main Content -->
+
+        <div id="historyModal" class="modal">
+            <div class="modal-content">
+                <span class="close"></span>
+                <h2>Histórico Completo de Registros</h2>
+                <ul id="fullLogList"></ul>
+            </div>
+        </div>
 
         <!-- Right Section -->
         <div class="right-section">
@@ -347,6 +357,63 @@ $user_name = $_SESSION['user_name']
     <script>
         // Define o nome do funcionário logado
         const loggedInEmployeeName = "<?php echo $user_name; ?>";
+
+        // Modal functionality
+document.addEventListener('DOMContentLoaded', (event) => {
+    const modal = document.getElementById("historyModal");
+    const btn = document.getElementById("historyBtn");
+    const span = document.getElementsByClassName("close")[0];
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+        loadFullAttendanceLog();
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+});
+
+// Função para carregar o histórico completo de registros na caixa flutuante
+function loadFullAttendanceLog() {
+    console.log('Chamando loadFullAttendanceLog'); // Log de depuração
+    const fullLogList = document.getElementById('fullLogList');
+    if (!fullLogList) {
+        console.error('Elemento fullLogList não encontrado');
+        return;
+    }
+    fullLogList.innerHTML = '';
+
+    // Requisição AJAX para buscar todos os registros do backend
+    fetch('backend.php?action=getFullAttendanceRecords')
+        .then(response => {
+            console.log(response); // Log da resposta
+            return response.json();
+        })
+        .then(records => {
+            console.log(records); // Log dos registros
+            records.forEach(record => {
+                const listItem = document.createElement('li');
+                let recordText = `${record.employee_name} - ${record.timestamp}`;
+
+                if (record.delay_reason) {
+                    recordText += ` - Motivo: ${record.delay_reason}`;
+                }
+
+                listItem.textContent = recordText;
+                fullLogList.appendChild(listItem);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao recuperar registros:', error);
+        });
+}
     </script>
     
     <script>

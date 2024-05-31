@@ -286,6 +286,41 @@ function exibirValorPorcentagem() {
     xhr.send();
 }
 
+// Função para carregar o histórico completo de registros na caixa flutuante
+function loadFullAttendanceLog() {
+    console.log('Chamando loadFullAttendanceLog'); // Log de depuração
+    const fullLogList = document.getElementById('fullLogList');
+    if (!fullLogList) {
+        console.error('Elemento fullLogList não encontrado');
+        return;
+    }
+    fullLogList.innerHTML = '';
+
+    // Requisição AJAX para buscar todos os registros do backend
+    fetch('backend.php?action=getFullAttendanceRecords')
+        .then(response => {
+            console.log(response); // Log da resposta
+            return response.json();
+        })
+        .then(records => {
+            console.log(records); // Log dos registros
+            records.forEach(record => {
+                const listItem = document.createElement('li');
+                let recordText = `${record.employee_name} - ${record.timestamp}`;
+
+                if (record.delay_reason) {
+                    recordText += ` - Motivo: ${record.delay_reason}`;
+                }
+
+                listItem.textContent = recordText;
+                fullLogList.appendChild(listItem);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao recuperar registros:', error);
+        });
+}
+
 // Função que é executada quando a página é carregada para exibir os valores de custo e porcentagem
 window.onload = function() {
     console.log("A página foi carregada. Chamando a função exibirValorPorcentagem()");
