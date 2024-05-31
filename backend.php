@@ -34,7 +34,7 @@ function requestEarlyOut($conn, $employeeName, $earlyOutReason, $userId) {
     return $stmt->execute();
 }
 
-function getAttendanceRecords($conn, $userId, $limit = 20) {
+function getAttendanceRecords($conn, $userId, $limit = 14) {
     $stmt = $conn->prepare("SELECT employee_name, timestamp, delay_reason FROM registerForm WHERE user_id = ? ORDER BY timestamp DESC LIMIT ?");
     $stmt->bind_param("ii", $userId, $limit);
     $stmt->execute();

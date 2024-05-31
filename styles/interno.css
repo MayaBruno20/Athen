@@ -1034,6 +1034,24 @@ html{
 }
 
 
+/* Estilos para o logList */
+#logList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#logList li {
+    margin-bottom: 0.6rem;
+    border-bottom: 1px solid var(--color-light); /* Linha divisória */
+    color: var(--color-dark); /* Cor do texto */
+    transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
+}
+
+#logList li:last-child {
+    border-bottom: none; /* Remove a linha divisória do último item */
+}
+
+
     @media screen and (max-width: 1200px) {
         .container {
             width: 95%;
