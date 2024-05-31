@@ -1,3 +1,5 @@
+console.log('ponto.js carregado'); // Log para garantir que o script está sendo carregado
+
 // Função para registrar o ponto
 function registerAttendance() {
     const employeeName = document.getElementById('employeeName').value;
@@ -32,26 +34,35 @@ function registerAttendance() {
     .catch(error => {
         alert(error.message);
     });
-  }
-  
-  // Função para exibir o registro de ponto, ponto de almoço e solicitações de saída antecipada
-  function displayAttendanceLog() {
+}
+
+// Função para exibir o registro de ponto, ponto de almoço e solicitações de saída antecipada
+function displayAttendanceLog() {
+    console.log('Chamando displayAttendanceLog'); // Log de depuração
     // Limpa a lista antes de recriá-la
     const logList = document.getElementById('logList');
+    if (!logList) {
+        console.error('Elemento logList não encontrado');
+        return;
+    }
     logList.innerHTML = '';
-  
+
     // Requisição AJAX para buscar os registros do backend
     fetch('backend.php?action=getAttendanceRecords')
-        .then(response => response.json())
+        .then(response => {
+            console.log(response); // Log da resposta
+            return response.json();
+        })
         .then(records => {
+            console.log(records); // Log dos registros
             records.forEach(record => {
                 const listItem = document.createElement('li');
                 let recordText = `${record.employee_name} - ${record.timestamp}`;
-  
+
                 if (record.delay_reason) {
                     recordText += ` - Motivo: ${record.delay_reason}`;
                 }
-  
+
                 listItem.textContent = recordText;
                 logList.appendChild(listItem);
             });
@@ -59,18 +70,18 @@ function registerAttendance() {
         .catch(error => {
             console.error('Erro ao recuperar registros:', error);
         });
-  }
-  
-  // Função para registrar o ponto de almoço
-  function registerLunchBreak() {
+}
+
+// Função para registrar o ponto de almoço
+function registerLunchBreak() {
     const employeeName = document.getElementById('employeeName').value;
     const action = 'registerLunchBreak'; // Indica a ação que será executada no backend
-  
+
     // Monta os dados a serem enviados para o backend
     const data = new URLSearchParams();
     data.append('employeeName', employeeName);
     data.append('action', action);
-  
+
     // Envia os dados para o backend via AJAX
     fetch('backend.php', {
         method: 'POST',
@@ -89,20 +100,20 @@ function registerAttendance() {
     .catch(error => {
         alert(error.message);
     });
-  }
-  
-  // Função para solicitar saída antecipada
-  function requestEarlyOut() {
+}
+
+// Função para solicitar saída antecipada
+function requestEarlyOut() {
     const employeeName = document.getElementById('employeeName').value;
     const earlyOutReason = document.getElementById('earlyOutReason').value;
     const action = 'requestEarlyOut'; // Indica a ação que será executada no backend
-  
+
     // Monta os dados a serem enviados para o backend
     const data = new URLSearchParams();
     data.append('employeeName', employeeName);
     data.append('earlyOutReason', earlyOutReason);
     data.append('action', action);
-  
+
     // Envia os dados para o backend via AJAX
     fetch('backend.php', {
         method: 'POST',
@@ -122,18 +133,19 @@ function registerAttendance() {
     .catch(error => {
         alert(error.message);
     });
-  }
-  
-  // Função para limpar os registros de ponto e ponto de almoço
-  function clearLogs() {
+}
+
+// Função para limpar os registros de ponto e ponto de almoço
+function clearLogs() {
     localStorage.removeItem('attendanceRecords');
     localStorage.removeItem('lunchBreakRecords');
     localStorage.removeItem('earlyOutRequests');
     displayAttendanceLog(); // Limpar a exibição dos registros
-  }
-  
-  // Chamar a função de exibição ao carregar a página
-  window.onload = function() {
+}
+
+// Chamar a função de exibição ao carregar a página
+window.onload = function() {
+    console.log('Página carregada'); // Log de depuração
     displayAttendanceLog(); // Exibir registro de ponto e ponto de almoço
     
     // Verificar se há um employeeName selecionado anteriormente no armazenamento local
@@ -142,5 +154,4 @@ function registerAttendance() {
         // Define o valor do campo employeeName para o valor armazenado
         document.getElementById('employeeName').value = selectedEmployeeName;
     }
-  };
-  
+};

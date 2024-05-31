@@ -195,6 +195,13 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
                         <button onclick="requestEarlyOut()">Solicitar Saída</button>
                     </div>
                 </div>
+
+                <div class="one-half column">
+                    <div class="links-list">
+                        <h2>Registros</h2>
+                        <ul id="logList"></ul>  
+                    </div>
+                </div>
             </div>
    
             <div id="manageProfile-box" class="additional-box" style="display: none;">
@@ -343,25 +350,17 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
             </div>
         </div>
     </div>
-
-
-    <script src="scripts/info.js"></script>
-        
-    <script src="scripts/index.js"></script>
-    <script>
-        function clearAttendanceLog() {
-            // Limpar registros no armazenamento local
-            localStorage.removeItem('attendanceRecords');
-            // Atualizar a exibição do registro de ponto
-            displayAttendanceLog();
-        }
-    </script>
     <script>
         function toggleSettings() {
             var settingsContent = document.querySelector('.settings-content');
-            settingsContent.style.display = (settingsContent.style.display === 'none' || settingsContent.style.display === '') ? 'block' : 'none';
+                settingsContent.style.display = (settingsContent.style.display === 'none' || settingsContent.style.display === '') ? 'block' : 'none';
         }
-    </script> 
+    </script>
     
+    <script src="scripts/index.js"></script>
+    <script src="scripts/main.js"></script>
+    
+    
+
 </body>
 </html>
