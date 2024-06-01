@@ -280,8 +280,10 @@ html{
         padding: 0.6rem;
         border: 1px solid var(--color-info-dark);
         border-radius: var(--border-radius-1);
+        background-color: var(--color-background);
         font-size: 1rem;
         margin-bottom: 1rem;
+        color: var(--color-dark);
     }
 
   

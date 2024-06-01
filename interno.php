@@ -343,7 +343,7 @@ $user_name = $_SESSION['user_name']
                                 <h3>Acessos</h3>
                             </div>
                             <span class="material-icons-sharp">
-                                <a href="acessos.html">
+                                <a href="acessos.php">
                                     key
                                 </a>
                             </span>

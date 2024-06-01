@@ -1,3 +1,51 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "pr";
+
+// Criar conexão
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar conexão
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $site = filter_input(INPUT_POST, 'site', FILTER_SANITIZE_STRING);
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+    $link = filter_input(INPUT_POST, 'link', FILTER_SANITIZE_STRING);
+
+    // Verificar se os valores não são nulos
+    if ($site === null || $username === null || $password === null || $link === null) {
+        die("Erro: Todos os campos do formulário são obrigatórios.");
+    }
+
+    // Usar prepared statements para evitar SQL Injection
+    $stmt = $conn->prepare("INSERT INTO senhas (site, username, password, link) VALUES (?, ?, ?, ?)");
+    
+    if ($stmt === false) {
+        die("Error preparing statement: " . $conn->error);
+    }
+
+    $stmt->bind_param("ssss", $site, $username, $password, $link);
+
+    if ($stmt->execute()) {
+        echo "Password saved successfully!";
+    } else {
+        echo "Error executing statement: " . $stmt->error;
+    }
+
+    $stmt->close();
+
+    // Redirecionar para a mesma página para evitar duplicação
+    header("Location: acessos.php");
+        exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,78 +104,73 @@
         <main>
             <h1>Acessos Publicos</h1>
             <!-- Analyses -->
-            <div class="analyse">
-                <div class="mouth">
-                    <div class="status">
-                        <div class="info">
-                            <h3>Segfy</h3>
-                            <button onclick="showAccess('segfy')">Login</button>
-                        </div>
-                        <div class="progresss">
-                            <small>
-                                <img src="Imagens/logos/Segfy.png" alt="">
-                            </small>
-                        </div>
-                    </div>
-                </div>
-                <div class="sales">
-                    <div class="status">
-                        <div class="info">
-                            <h3>Bradesco</h3>
-                            <button onclick="showAccess('brad')">Login</button>
-                        </div>
-                        <div class="progresss">
-                            <small>
-                                <img src="Imagens/logos/bradesco.png" alt="">
-                            </small>
-                        </div>
-                    </div>
-                </div>
-                <div class="visits">
-                    <div class="status">
-                        <div class="info">
-                            <h3>Porto</h3>
-                            <button onclick="showAccess('porto')">Login</button>
-                        </div>
-                        <div class="progresss">
-                            <small>
-                                <img src="Imagens/logos/porto.png" alt="">
-                            </small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="visits">
-                    <div class="status">
-                        <div class="info">
-                            <h3>Axa</h3>
-                            <button onclick="showAccess('axa')">Login</button>
-                        </div>
-                        <div class="progresss">
-                            <small>
-                                <img src="Imagens/logos/axa.png" alt="">
-                            </small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <form id="platformForm" method="post" action="acessos.php">
+                <label for="site">Plataforma:</label>
+                <input type="text" id="site" name="site" required>
+    
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required>
+    
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
+    
+                <label for="Link">Link:</label>
+                <input type="url" id="link" name="link" required>
+    
+                <button type="submit">Adicionar Plataforma</button>
+                
+            </form>
+            <button id="openModalBtn">Show Passwords</button>
             <!-- End of Analyses -->
-            <div id="modal" class="modal">
+
+            <!-- Botão para abrir o modal -->
+            
+
+            <!-- Modal -->
+            <div id="modal">
                 <div class="modal-content">
-                  <span class="close">&times;</span>
-                  <h2 id="platformTitle"></h2>
-                  <div class="editable-section">
-                    <p><b>Usuário:</b></p>
-                    <div contenteditable="true" id="email" class="editable-field"></div>
-                  </div>
-                  <div class="editable-section">
-                    <p><b>Senha:</b></p>
-                    <div contenteditable="true" id="senha" class="editable-field"></div>
-                  </div>
-                  <p><b>Link:</b> <a id="link" href="" target="_blank"></a></p>
-                  <button>Salvar</button>
+                <span class="close">&times;</span>
+                    <h2>Acessos</h2>
+                    <div id="passwordList"></div>
                 </div>
             </div>
+
+            <script>
+                // Abrir e fechar modal
+                const modal = document.getElementById("modal");
+                const btn = document.getElementById("openModalBtn");
+                const span = document.getElementsByClassName("close")[0];
+
+                btn.onclick = function() {
+                    modal.style.display = "block";
+                    fetchPasswords();
+                }
+
+                span.onclick = function() {
+                    modal.style.display = "none";
+                }
+
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+
+                // Função para buscar senhas
+                function fetchPasswords() {
+                    fetch('fetch_passwords.php')
+                        .then(response => response.json())
+                        .then(data => {
+                            const passwordList = document.getElementById('passwordList');
+                            passwordList.innerHTML = '';
+                            data.forEach(password => {
+                                const div = document.createElement('div');
+                                div.innerHTML = `<p><b>Site:</b> ${password.site} | <b>Username:</b> ${password.username} | <b>Password:</b> ${password.password}</p>`;
+                                passwordList.appendChild(div);
+                            });
+                        });
+                }
+            </script>
         </main>
         <!-- End of Main Content -->
 
@@ -194,7 +237,7 @@
             </div>
     </div>
 
-    <script src="scripts/acessos.js"></script>
+    <script src="acessos.js"></script>
     <script src="scripts/index.js"></script>    
 </body>
 
