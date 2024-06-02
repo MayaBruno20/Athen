@@ -1,8 +1,23 @@
-console.log('Script carregado'); // Log para garantir que o script está sendo carregado
+document.addEventListener('DOMContentLoaded', function() {
+    // Função para obter o nome do usuário logado
+    function getLoggedInEmployeeName() {
+        fetch('backend.php?action=getLoggedInEmployeeName')
+            .then(response => response.json())
+            .then(data => {
+                const employeeName = data.employeeName;
+                document.getElementById('employeeName').value = employeeName;
+                document.getElementById('profile-name').innerHTML = `Olá, <b>${employeeName}</b>`;
+            })
+            .catch(error => console.error('Erro ao obter o nome do funcionário logado:', error));
+    }
+
+    // Chame a função ao carregar a página
+    getLoggedInEmployeeName();
+});
 
 // Função para registrar o ponto
 function registerAttendance() {
-    const employeeName = loggedInEmployeeName;
+    const employeeName = document.getElementById('employeeName').value;
     const delayReason = document.getElementById('delayReason').value;
     const action = 'registerAttendance'; // Indica a ação que será executada no backend
     
@@ -71,7 +86,7 @@ function displayAttendanceLog() {
 
 // Função para registrar o ponto de almoço
 function registerLunchBreak() {
-    const employeeName = loggedInEmployeeName;
+    const employeeName = document.getElementById('employeeName').value;
     const action = 'registerLunchBreak'; // Indica a ação que será executada no backend
 
     // Monta os dados a serem enviados para o backend
@@ -101,7 +116,7 @@ function registerLunchBreak() {
 
 // Função para solicitar saída antecipada
 function requestEarlyOut() {
-    const employeeName = loggedInEmployeeName;
+    const employeeName = document.getElementById('employeeName').value;
     const earlyOutReason = document.getElementById('earlyOutReason').value;
     const action = 'requestEarlyOut'; // Indica a ação que será executada no backend
 
@@ -329,8 +344,14 @@ function loadFullAttendanceLog() {
                 const listItem = document.createElement('li');
                 let recordText = `${record.employee_name} - ${record.timestamp}`;
 
-                if (record.delay_reason) {
-                    recordText += ` - Motivo: ${record.delay_reason}`;
+                if (record.type === 'attendance') {
+                    if (record.reason) {
+                        recordText += ` - Motivo: ${record.reason}`;
+                    }
+                } else if (record.type === 'lunch') {
+                    recordText += ` - Ponto de Almoço`;
+                } else if (record.type === 'earlyOut') {
+                    recordText += ` - Saída Antecipada - Motivo: ${record.reason}`;
                 }
 
                 listItem.textContent = recordText;

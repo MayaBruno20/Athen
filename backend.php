@@ -50,6 +50,44 @@ function getAttendanceRecords($conn, $userId, $limit = 14) {
     echo json_encode($attendanceRecords);
 }
 
+function getFullAttendanceRecords($conn, $userId) {
+    $attendanceRecords = array();
+
+    // Buscar registros de registerForm
+    $stmt = $conn->prepare("SELECT 'attendance' AS type, employee_name, delay_reason AS reason, timestamp FROM registerForm WHERE user_id = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $attendanceRecords[] = $row;
+    }
+
+    // Buscar registros de lunchBreak
+    $stmt = $conn->prepare("SELECT 'lunch' AS type, employee_name, NULL AS reason, timestamp FROM lunchBreak WHERE user_id = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $attendanceRecords[] = $row;
+    }
+
+    // Buscar registros de earlyOut
+    $stmt = $conn->prepare("SELECT 'earlyOut' AS type, employee_name, early_out_reason AS reason, timestamp FROM earlyOut WHERE user_id = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $attendanceRecords[] = $row;
+    }
+
+    // Ordenar os registros pelo timestamp
+    usort($attendanceRecords, function($a, $b) {
+        return strtotime($b['timestamp']) - strtotime($a['timestamp']);
+    });
+
+    echo json_encode($attendanceRecords);
+}
+
 function getEmployeeList($conn) {
     $sql = "SELECT name FROM employees";
     $result = $conn->query($sql);
@@ -62,6 +100,18 @@ function getEmployeeList($conn) {
     }
 
     echo json_encode($employeeList);
+}
+
+function getLoggedInEmployeeName($conn, $userId) {
+    $stmt = $conn->prepare("SELECT username FROM usuarios WHERE id = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        return $row['username'];
+    } else {
+        return null;
+    }
 }
 
 session_start();
@@ -106,9 +156,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         getAttendanceRecords($conn, $userId);
     } elseif ($_GET["action"] == "getFullAttendanceRecords") {
         $userId = $_SESSION['user_id'];
-        getAttendanceRecords($conn, $userId, PHP_INT_MAX); // Retorna todos os registros
+        getFullAttendanceRecords($conn, $userId); // Retorna todos os registros
     } elseif ($_GET["action"] == "getEmployeeList") {
         getEmployeeList($conn);
+    } elseif ($_GET["action"] == "getLoggedInEmployeeName") {
+        $userId = $_SESSION['user_id'];
+        $employeeName = getLoggedInEmployeeName($conn, $userId);
+        echo json_encode(["employeeName" => $employeeName]);
     }
 }
 

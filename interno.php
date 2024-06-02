@@ -229,7 +229,7 @@ $user_name = $_SESSION['user_name']
 
                 <div class="profile">
                     <div class="info">
-                        <p>Olá, <b>Usuário</b></p>
+                        <p id="profile-name">Olá, <b><?php echo $user_name; ?></b></p>
                         <small class="text-muted">Admin</small>
                     </div>
 
@@ -336,63 +336,62 @@ $user_name = $_SESSION['user_name']
     <script>
         // Define o nome do funcionário logado
         const loggedInEmployeeName = "<?php echo $user_name; ?>";
-
         // Modal functionality
-document.addEventListener('DOMContentLoaded', (event) => {
-    const modal = document.getElementById("historyModal");
-    const btn = document.getElementById("historyBtn");
-    const span = document.getElementsByClassName("close")[0];
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const modal = document.getElementById("historyModal");
+            const btn = document.getElementById("historyBtn");
+            const span = document.getElementsByClassName("close")[0];
 
-    btn.onclick = function() {
-        modal.style.display = "block";
-        loadFullAttendanceLog();
-    }
+            btn.onclick = function() {
+                modal.style.display = "block";
+                loadFullAttendanceLog();
+            }
 
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
 
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-});
-
-// Função para carregar o histórico completo de registros na caixa flutuante
-function loadFullAttendanceLog() {
-    console.log('Chamando loadFullAttendanceLog'); // Log de depuração
-    const fullLogList = document.getElementById('fullLogList');
-    if (!fullLogList) {
-        console.error('Elemento fullLogList não encontrado');
-        return;
-    }
-    fullLogList.innerHTML = '';
-
-    // Requisição AJAX para buscar todos os registros do backend
-    fetch('backend.php?action=getFullAttendanceRecords')
-        .then(response => {
-            console.log(response); // Log da resposta
-            return response.json();
-        })
-        .then(records => {
-            console.log(records); // Log dos registros
-            records.forEach(record => {
-                const listItem = document.createElement('li');
-                let recordText = `${record.employee_name} - ${record.timestamp}`;
-
-                if (record.delay_reason) {
-                    recordText += ` - Motivo: ${record.delay_reason}`;
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
                 }
-
-                listItem.textContent = recordText;
-                fullLogList.appendChild(listItem);
-            });
-        })
-        .catch(error => {
-            console.error('Erro ao recuperar registros:', error);
+            }
         });
-}
+
+        // Função para carregar o histórico completo de registros na caixa flutuante
+        function loadFullAttendanceLog() {
+            console.log('Chamando loadFullAttendanceLog'); // Log de depuração
+            const fullLogList = document.getElementById('fullLogList');
+            if (!fullLogList) {
+                console.error('Elemento fullLogList não encontrado');
+                return;
+            }
+            fullLogList.innerHTML = '';
+
+            // Requisição AJAX para buscar todos os registros do backend
+            fetch('backend.php?action=getFullAttendanceRecords')
+                .then(response => {
+                    console.log(response); // Log da resposta
+                    return response.json();
+                })
+                .then(records => {
+                    console.log(records); // Log dos registros
+                    records.forEach(record => {
+                        const listItem = document.createElement('li');
+                        let recordText = `${record.employee_name} - ${record.timestamp}`;
+
+                        if (record.delay_reason) {
+                            recordText += ` - Motivo: ${record.delay_reason}`;
+                        }
+
+                        listItem.textContent = recordText;
+                        fullLogList.appendChild(listItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao recuperar registros:', error);
+                });
+        }
     </script>
     
     <script>
