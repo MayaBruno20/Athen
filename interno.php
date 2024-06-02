@@ -28,7 +28,7 @@ $user_name = $_SESSION['user_name']
         <aside>
             <div class="toggle">
                 <div class="logo">
-                    <img src="Imagens/1_PR-SEG_preferencial.png">
+                    <img src="Imagens/logos/favicon.png">
                     <h2>PR<span class="danger">Seg</span></h2>
                 </div>
                 <div class="close" id="close-btn">
@@ -111,7 +111,7 @@ $user_name = $_SESSION['user_name']
                 <div class="creatives">
                     <div class="status">
                         <div class="info">
-                            <h3>PR Seg</h3>
+                            <h3>Meta Mensal</h3>
                             <h2 id="custo" onClick="makeEditable(this)">R$0</h2>
                         </div>
 
@@ -131,15 +131,15 @@ $user_name = $_SESSION['user_name']
                 <div class="backup">
                     <div class="status">
                         <div class="info">
-                            <h3>PR Cred</h3>
-                            <h2>R$15K</h2>
+                            <h3>Comissão</h3>
+                            <h2>R$22.000</h2>
                         </div>
                         <div class="circleBtn">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div class="addBtn">
-                                <h1>4%</h1>
+                                <h1>0%</h1>
                             </div>
                         </div>
                     </div>
@@ -176,7 +176,7 @@ $user_name = $_SESSION['user_name']
                             <input type="text" id="delayReason" placeholder="Informe o motivo do atraso (opcional)">
                                 
                             <button onclick="registerAttendance()" aria-label="Registrar Ponto">Registrar Ponto</button>
-                            <button onclick="registerLunchBreak()" aria-label="Registrar Ponto de Almoço">Registrar Ponto de Almoço</button>
+                            <button class="btn" onclick="registerLunchBreak()" aria-label="Registrar Ponto de Almoço">Registrar Ponto de Almoço</button>
                         </div>
                     </div>    
 
