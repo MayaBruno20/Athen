@@ -232,8 +232,9 @@ $user_name = $_SESSION['user_name']
                         <p>Olá, <b>Usuário</b></p>
                         <small class="text-muted">Admin</small>
                     </div>
+
                     <div class="profile-photo">
-                        <img src="Imagens/Captura de tela 2023-10-06 131926.png">
+                        <img id="profilePhoto" src="" alt="Foto do funcionário">
                     </div>
                 </div>
             </div>
@@ -403,7 +404,6 @@ function loadFullAttendanceLog() {
     
     <script src="scripts/index.js"></script>
     <script src="scripts/main.js"></script>
-    
 </body>
 
 </html>
