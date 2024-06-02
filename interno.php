@@ -198,28 +198,6 @@ $user_name = $_SESSION['user_name']
                 </div>
                 
             </div>
-   
-            <div id="manageProfile-box" class="additional-box" style="display: none;">
-                <!-- Content for "Manage Profile" box -->
-                <form id="profile-form">
-                    <button type="submit">Salvar</button>
-                    <button type="button" class="close-box">Fechar</button>
-                </form> 
-            </div>
-
-            <div id="languages-box" class="additional-box" style="display: none;">
-                <form> 
-                    <button type="submit">Salvar</button>
-                    <button type="button" class="close-box">Fechar</button>
-                </form>
-            </div>
-
-            <div id="notification-box" class="additional-box" style="display: none;">
-                <form id="notification-form">
-                    <button type="submit">Salvar Configurações</button>
-                    <button type="button" class="close-box">Fechar</button>
-                </form>
-            </div>
         </main>
         <!-- End of Main Content -->
 
