@@ -112,7 +112,7 @@ $user_name = $_SESSION['user_name']
                     <div class="status">
                         <div class="info">
                             <h3>Meta Mensal</h3>
-                            <h2 id="custo" onClick="makeEditable(this)">R$0</h2>
+                            <h2 id="custo" onClick="makeEditable(this)">R$0.00</h2>
                         </div>
 
                         <div class="circleBtn">
@@ -131,8 +131,8 @@ $user_name = $_SESSION['user_name']
                 <div class="backup">
                     <div class="status">
                         <div class="info">
-                            <h3>Comissão</h3>
-                            <h2>R$22.000</h2>
+                            <h3></h3>
+                            <h2>Atual.</h2>
                         </div>
                         <div class="circleBtn">
                             <svg>
@@ -148,8 +148,8 @@ $user_name = $_SESSION['user_name']
                 <div class="requests">
                     <div class="status">
                         <div class="info">
-                            <h3>Athen</h3>
-                            <h2></h2>
+                            <h3></h3>
+                            <h2>Atual.</h2>
                         </div>
 
                         <div class="circleBtn">
@@ -157,7 +157,7 @@ $user_name = $_SESSION['user_name']
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div class="addBtn">
-                                <h1>60%</h1>
+                                <h1>0%</h1>
                             </div>
                         </div>
                     </div>

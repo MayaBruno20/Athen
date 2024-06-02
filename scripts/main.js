@@ -194,6 +194,7 @@ function makeEditablePorcentagem(element) {
             saveChangesPorcentagem(element, input.value);
             element.innerText = input.value + '%';
             input.parentNode.replaceChild(element, input);
+            updateCircle(); // Atualiza o círculo após salvar a porcentagem
         }
     });
 
@@ -277,6 +278,7 @@ function exibirValorPorcentagem() {
                 var valorPorcentagem = xhr.responseText;
                 console.log("Valor da porcentagem recebido: " + valorPorcentagem);
                 document.getElementById("porcentagem").innerText = valorPorcentagem + '%';
+                updateCircle(); // Atualiza o círculo sempre que o valor é exibido
             } else {
                 console.log("Erro ao receber resposta: " + xhr.status);
                 alert("Erro ao buscar os dados de porcentagem: " + xhr.statusText);
@@ -284,6 +286,25 @@ function exibirValorPorcentagem() {
         }
     };
     xhr.send();
+}
+
+// Função para atualizar o círculo SVG de acordo com a porcentagem
+function updateCircle() {
+    const percentageElement = document.getElementById('porcentagem');
+    const percentage = parseFloat(percentageElement.innerText.replace('%', '').trim());
+    const circle = document.querySelector('.creatives svg circle');
+    
+    if (!circle) {
+        console.error('SVG circle element not found');
+        return;
+    }
+
+    const radius = circle.r.baseVal.value;
+    const circumference = 2 * Math.PI * radius;
+    const offset = circumference - (percentage / 100) * circumference;
+    
+    circle.style.strokeDasharray = `${circumference} ${circumference}`;
+    circle.style.strokeDashoffset = offset;
 }
 
 // Função para carregar o histórico completo de registros na caixa flutuante
@@ -328,3 +349,6 @@ window.onload = function() {
     exibirValorPorcentagem();
     displayAttendanceLog();
 };
+
+// Chamar updateCircle quando a página for carregada
+window.addEventListener('load', updateCircle);

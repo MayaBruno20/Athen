@@ -407,6 +407,10 @@ html{
         justify-content: space-between;
     }
 
+    main .folders h1{
+        font-size: 20px;
+    }
+
     main .folders button{
         width: auto;
         height: auto;
@@ -440,11 +444,12 @@ html{
         transform: translate(5px, 5px);
     }
 
-    main .folders .creatives svg circle{
+    main .folders .creatives svg circle {
         stroke: var(--color-dark-variant);
-        stroke-dashoffset: -30;
-        stroke-dasharray: 200;
+        stroke-dashoffset: 0;
+        stroke-dasharray: 0 200; /* Inicialize com um valor arbitrário */
     }
+    
 
     main .folders .backup svg circle{
         stroke: var(--color-success);
