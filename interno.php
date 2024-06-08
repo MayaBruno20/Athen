@@ -107,11 +107,11 @@ $user_name = $_SESSION['user_name']
         <!-- Main Content -->
         <main>
             <h1>Interno</h1>
-            <div class="folders">
+            <div class="graph">
                 <div class="creatives">
                     <div class="status">
                         <div class="info">
-                            <h3>Meta Mensal</h3>
+                            <h3>Meta Pessoal</h3>
                             <h2 id="custo" onClick="makeEditable(this)">R$0.00</h2>
                         </div>
 
@@ -128,11 +128,11 @@ $user_name = $_SESSION['user_name']
 
                 </div>
 
-                <div class="backup">
+                <div class="hourly-load">
                     <div class="status">
                         <div class="info">
-                            <h3></h3>
-                            <h2>Atual.</h2>
+                            <h3>Carga Horária</h3>
+                            <h2>40h</h2>
                         </div>
                         <div class="circleBtn">
                             <svg>
@@ -149,7 +149,7 @@ $user_name = $_SESSION['user_name']
                     <div class="status">
                         <div class="info">
                             <h3></h3>
-                            <h2>Atual.</h2>
+                            <h2></h2>
                         </div>
 
                         <div class="circleBtn">
@@ -282,7 +282,7 @@ $user_name = $_SESSION['user_name']
                             </div>
 
                             <span class="material-icons-sharp">
-                                <a href="https://drive.google.com/drive/folders/1_yyjXr8pCBFlGvIN9oxxXupLAbGjVcE4?usp=sharing" target="_blank">
+                                <a href="https://drive.google.com/drive/graph/1_yyjXr8pCBFlGvIN9oxxXupLAbGjVcE4?usp=sharing" target="_blank">
                                 cloud_download
                                 </a>
                             </span>

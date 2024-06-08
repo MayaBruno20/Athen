@@ -224,76 +224,6 @@ html{
         margin-top: 1.4rem;
     }
 
-    .additional-box {
-        display: none;
-        background-color: var(--color-white);
-        padding: var(--card-padding);
-        border-radius: var(--card-border-radius);
-        margin-top: 1rem;
-        box-shadow: var(--box-shadow);
-        width: 100%;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    
-    .additional-box:hover {
-        box-shadow: none;
-    }
-    
-    .additional-box p {
-        color: var(--color-dark-variant);
-        margin-bottom: 1rem;
-    }
-    
-    .additional-box button {
-        background-color: var(--color-danger);
-        color: var(--color-white);
-        border: none;
-        border-radius: var(--border-radius-1);
-        padding: 0.6rem 1rem;
-        cursor: pointer;
-    }
-    
-    .additional-box button:hover {
-        background-color: var(--color-dark-variant);
-    }
-    
-    .additional-box form {
-        display: grid;
-        gap: 1.2rem;
-    }
-    
-    .additional-box label {
-        font-weight: 500;
-    }
-    
-    .additional-box input,
-    .additional-box textarea {
-        width: 100%;
-        padding: 0.6rem;
-        border: 1px solid var(--color-info-dark);
-        border-radius: var(--border-radius-1);
-        font-size: 1rem;
-    }
-    
-    .additional-box button {
-        background-color: var(--color-primary);
-        color: var(--color-white);
-        border: none;
-        padding: 0.6rem 1rem;
-        border-radius: var(--border-radius-1);
-        cursor: pointer;
-    }
-    
-    .additional-box button.close-box {
-        background-color: var(--color-danger);
-        margin-top: 0.6rem;
-    }
-    
-    .additional-box button:hover {
-        background-color: var(--color-dark-variant);
-    }
-
     main .analyse{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -379,11 +309,11 @@ html{
         width: 100%;
     }
 
-    main .new-users{
+    main .analyses{
         margin-top: 1.3rem;
     }
 
-    main .new-users .user-list{
+    main .analyses .list-one{
         background-color: var(--color-white);
         padding: var(--card-padding);
         border-radius: var(--card-border-radius);
@@ -397,24 +327,25 @@ html{
         transition: all 0.3s ease;
     }
 
-    main .new-users .user-list:hover{
+    main .analyses .list-one:hover{
         box-shadow: none;
     }
 
-    main .new-users .user-list .user{
+    main .analyses .list-one .user{
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
 
-    main .new-users .user-list .user img{
+    main .analyses .list-one .user img{
         width: 5rem;
         height: 5rem;
         margin-bottom: 0.4rem;
         border-radius: 50%;
     }
     
+
     main .recent-orders{
         margin-top: 1.3rem;
     }
@@ -567,6 +498,35 @@ html{
         margin-bottom: 0.2rem;
     }
 
+
+    .right-section .search-bar {
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .right-section .search-bar input {
+        padding: 0.6rem;
+        border: 1px solid var(--color-info-dark);
+        border-radius: var(--border-radius-1);
+        font-size: 1rem;
+    }
+    
+    .right-section .search-bar button {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        border: none;
+        padding: 0.6rem 1rem;
+        border-radius: var(--border-radius-1);
+        cursor: pointer;
+        margin-left: 0.6rem;
+    }
+    
+    .right-section .search-bar button:hover {
+        background-color: var(--color-dark-variant);
+    }
+    
+    
     .right-section .reminders{
         margin-top: 2rem;
     }
@@ -677,7 +637,7 @@ html{
             gap: 0;
         }
 
-        main .new-users .user-list .user{
+        main .analyses .list-one .user{
             flex-basis: 40%;
         }
 
@@ -762,7 +722,7 @@ html{
             padding: 0 1rem;
         }
 
-        main .new-users .user-list .user{
+        main .analyses .list-one .user{
             flex-basis: 35%;
         }
 

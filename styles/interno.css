@@ -381,13 +381,13 @@ html{
         margin-top: 1.4rem;
     }
 
-    main .folders{
+    main .graph{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 1.6rem;
     }
 
-    main .folders > div{
+    main .graph > div{
         background-color: var(--color-white);
         padding: var(--card-padding);
         border-radius: var(--card-border-radius);
@@ -397,73 +397,73 @@ html{
         transition: all 0.3s ease;
     }
 
-    main .folders > div:hover{
+    main .graph > div:hover{
         box-shadow: none;
     }
 
-    main .folders > div .status{
+    main .graph > div .status{
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
 
-    main .folders h1{
+    main .graph h1{
         font-size: 20px;
     }
 
-    main .folders button{
+    main .graph button{
         width: auto;
         height: auto;
     }
 
-    main .folders input{
+    main .graph input{
         width: 80%;
     }
 
-    main .folders h3{
+    main .graph h3{
         margin-left: 0.6rem;
         font-size: 1rem;
     }
 
-    main .folders .circleBtn{
+    main .graph .circleBtn{
         position: relative;
         width: 92px;
         height: 92px;
         border-radius: 50%;
     }
 
-    main .folders svg{
+    main .graph svg{
         width: 7rem;
         height: 7rem;
     }
 
-    main .folders svg circle{
+    main .graph svg circle{
         fill: none;
         stroke-width: 10;
         stroke-linecap: round;
         transform: translate(5px, 5px);
     }
 
-    main .folders .creatives svg circle {
+    main .graph .creatives svg circle {
         stroke: var(--color-dark-variant);
         stroke-dashoffset: 0;
         stroke-dasharray: 0 200; /* Inicialize com um valor arbitrário */
     }
     
 
-    main .folders .backup svg circle{
+    main .graph .hourly-load svg circle{
         stroke: var(--color-success);
         stroke-dashoffset: -30;
         stroke-dasharray: 200;
     }
 
-    main .folders .requests svg circle{
+    main .graph .requests svg circle{
         stroke: var(--color-danger);
         stroke-dashoffset: -30;
         stroke-dasharray: 200;
     }
 
-    main .folders .circleBtn .addBtn{
+    main .graph .circleBtn .addBtn{
         position: absolute;
         top: -3px;
         left: -1px;
@@ -778,12 +778,12 @@ html{
             margin-top: 1.8rem;
         }
     
-        main .folders {
+        main .graph {
             grid-template-columns: 1fr;
             gap: 0;
         }
     
-        main .folders > div {
+        main .graph > div {
             flex-basis: 40%;
         }
 
@@ -847,7 +847,7 @@ html{
             padding: 0 1rem;
         }
     
-        main .folders > div {
+        main .graph > div {
             flex-basis: 35%;
         }
     
