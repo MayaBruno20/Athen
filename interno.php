@@ -127,13 +127,14 @@ $user_name = $_SESSION['user_name']
                     </div>
 
                 </div>
-
-                <div class="hourly-load">
+                
+                <div class="requests">
                     <div class="status">
                         <div class="info">
-                            <h3>Carga Horária</h3>
-                            <h2>40h</h2>
+                            <h3>Estornos</h3>
+                            <h2>R$0</h2>
                         </div>
+
                         <div class="circleBtn">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
@@ -144,14 +145,13 @@ $user_name = $_SESSION['user_name']
                         </div>
                     </div>
                 </div>
-
-                <div class="requests">
+                
+                <div class="hourly-load">
                     <div class="status">
                         <div class="info">
-                            <h3></h3>
-                            <h2></h2>
+                            <h3>Carga Horária</h3>
+                            <h2>40h</h2>
                         </div>
-
                         <div class="circleBtn">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
@@ -259,6 +259,9 @@ $user_name = $_SESSION['user_name']
                         <div class="content">
                             <div class="info">
                                 <h3>Backup</h3>
+                                <small class="text_muted">
+                                    Editar
+                                </small>
                             </div>
                             <span id="manageProfile" class="material-icons-sharp">
                                 cloud_download
